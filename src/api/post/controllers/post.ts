@@ -25,4 +25,11 @@ export default factories.createCoreController('api::post.post', ({ strapi }) => 
     })
     return { data: attrs, meta };
   },
+  async findOne(ctx) {
+    ctx.query = { ...ctx.query, }
+    // Calling the default core action
+    const { data } = await super.findOne(ctx);
+
+    return { id: data.id, ...data.attributes };
+  }
 }));
